@@ -13,3 +13,11 @@ body{
     width: 1000px;
     margin: 20px auto;
 }
+
+.results .result{
+    margin: 10px 0;
+}
+
+.result-list{
+    list-style: none;
+}

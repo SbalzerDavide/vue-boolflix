@@ -15,6 +15,26 @@
             <input type="text" @keyup.enter="makeResearch" v-model="search">
             <button @click="makeResearch">search</button>
         </div>
+
+        <div class="results">
+            <ul class="result-list">
+                <li class="result" v-for="result in list">
+                    <ul>
+                        <li>{{ result.original_title }}</li>
+                        <li>{{ result.title }}</li>
+                        <li>{{ result.original_language }}</li>
+                        <li>{{ result.vote_average }}</li>
+
+                    </ul>
+                    
+                    
+                   
+                    
+                </li>
+            </ul>
+
+        </div>
+
     </div>
     
 

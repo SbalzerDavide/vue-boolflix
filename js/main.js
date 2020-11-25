@@ -3,6 +3,7 @@ const app = new Vue ({
     data:{
         apiKey: 'e6b299c9bc3d24b73c05ea01c7f18871',
         search: '',
+        list: [],
 
     },
     created(){
@@ -10,7 +11,24 @@ const app = new Vue ({
     },
     methods:{
         makeResearch(){
-            console.log(this.search);
-        }
+            axios.get('https://api.themoviedb.org/3/search/movie', {
+                params: {
+                    api_key: this.apiKey,
+                    query: this.search,
+                    language: 'it-IT',
+                }
+            })
+            .then(response => {
+                console.log(response.data.results);
+                this.list = response.data.results;
+
+
+            })
+            .catch(error =>{
+                console.log('eror: ', error);
+            })
+            this.search= '';
+
+        },
     }
 });
