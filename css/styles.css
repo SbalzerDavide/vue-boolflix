@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: rosybrown;
+    font-family: sans-serif;
+}
+
+#app{
+    width: 1000px;
+    margin: 20px auto;
+}
