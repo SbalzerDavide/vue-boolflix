@@ -11,6 +11,13 @@ const app = new Vue ({
     },
     methods:{
         makeResearch(){
+            this.list = [];
+            // setTimeout(this.tv, 10000);
+            this.tv();
+            
+            this.movie();
+        },
+        movie(){
             axios.get('https://api.themoviedb.org/3/search/movie', {
                 params: {
                     api_key: this.apiKey,
@@ -21,7 +28,29 @@ const app = new Vue ({
             .then(response => {
                 console.log(response.data.results);
                 this.list = response.data.results;
-
+            })
+            .catch(error =>{
+                console.log('eror: ', error);
+            })
+            this.search= '';
+        },
+        tv(){
+            axios.get('https://api.themoviedb.org/3/search/tv', {
+                params: {
+                    api_key: this.apiKey,
+                    query: this.search,
+                    language: 'it-IT',
+                }
+            })
+            .then(response => {
+                for (let i = 0; i < response.data.results.length; i++){
+                    this.list.push({
+                        vote_average: response.data.results[i].vote_average,
+                        title: response.data.results[i].name,
+                        original_title: response.data.results[i].original_name,
+                        original_language: response.data.results[i].original_language,
+                    })
+                }
 
             })
             .catch(error =>{
@@ -37,6 +66,9 @@ const app = new Vue ({
             if (this.list[ind].original_language === 'en'){
                 return
             }
+        },
+        ciao(){
+            console.log('ciao');
         }
     }
 });
