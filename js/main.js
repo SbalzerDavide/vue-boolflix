@@ -11,11 +11,12 @@ const app = new Vue ({
     },
     methods:{
         makeResearch(){
-            this.list = [];
-            // setTimeout(this.tv, 10000);
-            this.tv();
-            
-            this.movie();
+            if (this.search != 0 ){
+                this.list = [];
+                this.movie();
+                this.tv();
+                this.search= '';
+            };
         },
         movie(){
             axios.get('https://api.themoviedb.org/3/search/movie', {
@@ -32,7 +33,6 @@ const app = new Vue ({
             .catch(error =>{
                 console.log('eror: ', error);
             })
-            this.search= '';
         },
         tv(){
             axios.get('https://api.themoviedb.org/3/search/tv', {
@@ -50,25 +50,14 @@ const app = new Vue ({
                         original_title: response.data.results[i].original_name,
                         original_language: response.data.results[i].original_language,
                     })
-                }
-
+                };
             })
             .catch(error =>{
                 console.log('eror: ', error);
-            })
-            this.search= '';
-
+            });
         },
         takeVote(ind){
             return Math.ceil(this.list[ind].vote_average /2 );
         },
-        flag(ind){
-            if (this.list[ind].original_language === 'en'){
-                return
-            }
-        },
-        ciao(){
-            console.log('ciao');
-        }
     }
 });
