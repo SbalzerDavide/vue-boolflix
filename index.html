@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="./css/styles.css">
     <title>Boolflix</title>
 </head>
@@ -18,13 +19,24 @@
 
         <div class="results">
             <ul class="result-list">
-                <li class="result" v-for="result in list">
+                <li class="result" v-for="(result, index) in list">
                     <ul>
-                        <li>{{ result.original_title }}</li>
-                        <li>{{ result.title }}</li>
-                        <li>{{ result.original_language }}</li>
-                        <li>{{ result.vote_average }}</li>
+                        <li>Titolo: {{ result.title }}</li>
+                        <li>Titolo originale: {{ result.original_title }}</li>
+                        <li class="language">
+                            Lingua: 
+                            <img v-if="result.original_language === 'it'" src="./img/it.png" alt="en flag">
+                            <img v-else-if="result.original_language === 'en'" src="./img/en.png" alt="it flag">
 
+                            <div v-else class="flag">
+                                {{ result.original_language }}
+                            </div>
+
+                        </li>
+                        <li>
+                            Valutazione: 
+                            <i v-for="n in takeVote(index)" class="fas fa-star"></i><i v-for="n in (5 - takeVote(index))" class="far fa-star"></i>
+                        </li>
                     </ul>
                     
                     

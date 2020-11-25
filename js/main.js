@@ -30,5 +30,13 @@ const app = new Vue ({
             this.search= '';
 
         },
+        takeVote(ind){
+            return Math.ceil(this.list[ind].vote_average /2 );
+        },
+        flag(ind){
+            if (this.list[ind].original_language === 'en'){
+                return
+            }
+        }
     }
 });

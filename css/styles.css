@@ -5,7 +5,7 @@
 }
 
 body{
-    background-color: rosybrown;
+    color: black;
     font-family: sans-serif;
 }
 
@@ -16,8 +16,21 @@ body{
 
 .results .result{
     margin: 10px 0;
+    border-bottom: 1px solid #aaa;
 }
 
 .result-list{
     list-style: none;
+}
+
+.result .language{
+    display: flex;
+    align-items: center;
+}
+
+.result img{
+    margin: 5px;
+    max-width: 30px;
+    border-radius: 2px;
+
 }
