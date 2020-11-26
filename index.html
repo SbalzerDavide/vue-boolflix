@@ -34,11 +34,14 @@
         </div>
 
         <!-- main -->
-        <div class="filter">
+        <div v-show="showFilter" class="filter">
             Filtra la ricerca per genere
-            <select >
+            <select 
+                @change="applyFilter"
+                v-model="filter"
+            >
                 <option value="all" selected="selected" >All</option>
-                <option v-for="genre in listActualGenre">{{ genre }}</option>
+                <option v-for="genre in allGenre">{{ genre.name }}</option>
             </select>
         </div>
 
@@ -47,40 +50,48 @@
             <div class="container">
                 <ul class="result-list">
                     <li class="result" v-for="(result, index) in list">
-                        <ul>
-                            <li class="cover">
-                                <img 
-                                    v-if="result.poster_path"
-                                    :src="`http://image.tmdb.org/t/p/w342/${result.poster_path}`" alt=""
-                                >
-                                <img 
-                                    v-else
-                                    src="https://www.altavod.com/assets/images/poster-placeholder.png" alt=""
-                                >
-    
-    
-                            </li>
-                            <li class="title">{{ result.title }}</li> 
-                            <!-- {{ result.genre_ids }} -->
-                            <li class="original-title">{{ result.original_title }}</li>
-
-                            <li class="vote">
-                                <i v-for="n in takeVote(result.vote_average)" class="fas fa-star"></i><i v-for="n in (5 - takeVote(result.vote_average))" class="far fa-star"></i>
-                            </li>
-
-                            <li class="language">
-                                <img v-if="flag(result.original_language)" 
-                                    :src="`./img/${result.original_language}.png`" 
-                                    alt=""
-                                >
-                                <div v-else class="flag">
-                                     {{ result.original_language }}
+                        <div class="card">
+                            <div class="content">
+                                <div class="cover">
+                                    <img 
+                                        v-if="result.poster_path"
+                                        :src="`http://image.tmdb.org/t/p/w342/${result.poster_path}`" alt=""
+                                    >
+                                    <img 
+                                        v-else
+                                        src="https://www.altavod.com/assets/images/poster-placeholder.png" alt=""
+                                    >
                                 </div>
-                            </li>
-                            <li v-if="result.overview" class="show-hover">
-                                {{result.overview}}
-                            </li>
-                        </ul>
+                                <div class="title">
+                                    {{ result.title }}
+                                </div>
+                                <div class="original-title">
+                                    {{ result.original_title }}
+                                </div>
+                                <div class="vote">
+                                    <i v-for="n in takeVote(result.vote_average)" class="fas fa-star"></i><i v-for="n in (5 - takeVote(result.vote_average))" class="far fa-star"></i>
+                                </div>
+                                <div class="language">
+                                    <img 
+                                        v-if="flag(result.original_language)" 
+                                        :src="`./img/${result.original_language}.png`" 
+                                        alt=""
+                                    >
+                                    <div v-else class="flag">
+                                        {{ result.original_language }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div v-if="result.overview" class="show-hover">
+                                <div class="text">
+                                    {{result.overview}}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                     </li>
                 </ul>
             </div>
