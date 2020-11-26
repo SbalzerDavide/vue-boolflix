@@ -25,17 +25,17 @@
                         <li>Titolo originale: {{ result.original_title }}</li>
                         <li class="language">
                             Lingua: 
-                            <img v-if="result.original_language === 'it'" src="./img/it.png" alt="en flag">
-                            <img v-else-if="result.original_language === 'en'" src="./img/en.png" alt="it flag">
-
+                            <img v-if="flag(result.original_language)" 
+                                :src="`./img/${result.original_language}.png`" 
+                                alt=""
+                            >
                             <div v-else class="flag">
-                                {{ result.original_language }}
+                                 {{ result.original_language }}
                             </div>
-
                         </li>
                         <li>
                             Valutazione: 
-                            <i v-for="n in takeVote(index)" class="fas fa-star"></i><i v-for="n in (5 - takeVote(index))" class="far fa-star"></i>
+                            <i v-for="n in takeVote(result.vote_average)" class="fas fa-star"></i><i v-for="n in (5 - takeVote(result.vote_average))" class="far fa-star"></i>
                         </li>
                     </ul>
                 </li>
