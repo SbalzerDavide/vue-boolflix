@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="./css/styles.css">
     <title>Boolflix</title>
@@ -32,6 +34,15 @@
         </div>
 
         <!-- main -->
+        <div class="filter">
+            Filtra la ricerca per genere
+            <select >
+                <option value="all" selected="selected" >All</option>
+                <option v-for="genre in listActualGenre">{{ genre }}</option>
+            </select>
+        </div>
+
+
         <div class="results">
             <div class="container">
                 <ul class="result-list">
@@ -49,7 +60,8 @@
     
     
                             </li>
-                            <li class="title">{{ result.title }}</li>
+                            <li class="title">{{ result.title }}</li> 
+                            <!-- {{ result.genre_ids }} -->
                             <li class="original-title">{{ result.original_title }}</li>
 
                             <li class="vote">
@@ -65,8 +77,9 @@
                                      {{ result.original_language }}
                                 </div>
                             </li>
-
-
+                            <li v-if="result.overview" class="show-hover">
+                                {{result.overview}}
+                            </li>
                         </ul>
                     </li>
                 </ul>

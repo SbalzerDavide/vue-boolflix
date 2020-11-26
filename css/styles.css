@@ -7,8 +7,7 @@
 body{
     color: #fff;
     background-color: #1e2d3b;
-    font-family: sans-serif;
-}
+    font-family: 'Roboto', sans-serif;}
 
 /* general */
 ul{
@@ -62,10 +61,15 @@ ul{
 
 
 /* main */
+/* select */
+.filter{
+    margin: 10px 0;
+    text-align: center;
+}
 .results{
     flex-grow: 1;
     overflow: auto;
-    margin-top: 50px;
+    padding-top: 50px;
 }
 
 .result-list{
@@ -76,10 +80,15 @@ ul{
 
 /* single box */
 .results .result{
+    position: relative;
     width: 200px;
     background-color: #2e3a46;
     margin: 10px 20px;
     padding: 10px 30px;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .3s;
 }
 
 .result ul>li{
@@ -88,6 +97,7 @@ ul{
 
 .result .cover img{
     width: 100%;
+    border-radius: 5px;
 }
 
 .result .title{
@@ -111,6 +121,34 @@ ul{
     margin: 5px;
     max-width: 30px;
     border-radius: 2px;
+}
+
+.result:hover{
+    transform: scale(1.2);
+    z-index: 1;
+}
+
+.result:hover .show-hover{
+    opacity: 1;
+}
+
+
+.result .show-hover{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    overflow: auto;
+    padding: 10px;
+    font-size: 14px;
+    color: #fff;
+    background-color: rgba(0,0,0,.6);
+    opacity: 0;
+    transition: opacity .3s;
 }
 
 
