@@ -28,9 +28,13 @@ body{
     align-items: center;
 }
 
-.result img{
+.result .language img{
     margin: 5px;
     max-width: 30px;
     border-radius: 2px;
-
 }
+
+.result .cover img{
+    width: 200px;
+}
+

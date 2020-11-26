@@ -21,6 +21,18 @@
             <ul class="result-list">
                 <li class="result" v-for="(result, index) in list">
                     <ul>
+                        <li class="cover">
+                            <img 
+                                v-if="result.poster_path"
+                                :src="`http://image.tmdb.org/t/p/w342/${result.poster_path}`" alt=""
+                            >
+                            <img 
+                                v-else
+                                src="https://www.altavod.com/assets/images/poster-placeholder.png" alt=""
+                            >
+
+
+                        </li>
                         <li>Titolo: {{ result.title }}</li>
                         <li>Titolo originale: {{ result.original_title }}</li>
                         <li class="language">
