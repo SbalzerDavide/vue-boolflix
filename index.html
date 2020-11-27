@@ -34,22 +34,42 @@
         </div>
 
         <!-- main -->
-        <div v-show="showFilter" class="filter">
-            Filtra la ricerca per genere
-            <select 
-                @change="applyFilter"
-                v-model="filter"
-            >
-                <option value="all" selected="selected" >All</option>
-                <option v-for="genre in allGenre">{{ genre.name }}</option>
-            </select>
+        <div v-show="showFilter" class="filter container">
+            <div class="preview">
+                <span v-if="!moreFilter" @click="moreFilter = !moreFilter">
+                    Applica dei filtri alla tua ricerca
+                </span>
+                <span v-else @click="moreFilter = !moreFilter">
+                    Nascondi i filtri
+                </span>
+            </div>
+            <div v-if="moreFilter" class="all-filter">
+
+                <!-- genre -->
+                <select 
+                    v-model="filter"
+                >
+                    <option value="all" selected="selected" >All</option>
+                    <option v-for="genre in allGenre">{{ genre.name }}</option>
+                </select>
+
+                <!-- year -->
+                <div class="year">
+                    <span>Anno di uscita</span>
+                    <input type="number" v-model="year">
+                    <span class="error-filter" v-if="!correctYear">Attenzione inserisci un anno compreso tra 1900 e l'anno attuale</span>
+                </div>
+
+                <button @click="applyFilter">applica filtri</button>
+
+            </div>
         </div>
 
 
         <div class="results">
             <div class="container">
                 <ul class="result-list">
-                    <li class="result" v-for="(result, index) in list">
+                    <li class="result" @mouseleave="more=false" v-for="(result, index) in list">
                         <div class="card">
                             <div class="content">
                                 <div class="cover">

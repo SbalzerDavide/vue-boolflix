@@ -11,13 +11,18 @@ const app = new Vue ({
         filter: 'all',
         filterObj: {},
         showFilter: false,
+        moreFilter: false,
         overDescription: false,
         more:false,
+        year: '',
+        correctYear: true,
+
         
 
     },
     created(){ 
         this.getGenres();
+        this.controlYear();
 
     },
     methods:{
@@ -68,7 +73,7 @@ const app = new Vue ({
                 })
                 .catch(error =>{
                     console.log('eror: ', error);
-                })
+                });
             };
             this.showFilter = true;
 
@@ -87,8 +92,6 @@ const app = new Vue ({
                         this.listActualGenre.push(genre);
                     };
                 });
-                console.log('ciao');
-                console.log(element.genre_ids);
             });
             console.log(this.listActualGenre);
 
@@ -135,18 +138,22 @@ const app = new Vue ({
                 if (element.overview.length > 300){
                     this.overDescription = true;
                     element.short_overview = element.overview.slice(0,300);
-                    // element.overview = element.overview.slice(0,300);
                 };
             })
         },
         applyFilter(){
-            if (this.search !== ''){
+            if (this.year < 1900 || this.year > 2020){
+                this.correctYear = false;
+            }else if (this.search !== ''){
+
+            
                 // other api call for movie 
                 axios.get('https://api.themoviedb.org/3/search/movie', {
                     params: {
                         api_key: this.apiKey,
                         query: this.search,
                         language: 'it-IT',
+                        year: this.year,
                     }
                 })
                 .then(response => {
@@ -158,6 +165,7 @@ const app = new Vue ({
                             api_key: this.apiKey,
                             query: this.search,
                             language: 'it-IT',
+                            year: this.year
                         }
                     })
                     .then(response => {
@@ -193,8 +201,14 @@ const app = new Vue ({
                 .catch(error =>{
                     console.log('eror: ', error);
                 });
+                this.correctYear = true;
             };
         },
+        controlYear(){
+            if (this.year < 1900 || this.year > 2020){
+                this.correctyear = false;
+            }
+        }
 
 
     }
