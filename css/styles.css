@@ -58,8 +58,6 @@ ul{
     outline: none;
 }
 
-
-
 /* main */
 /* select */
 .filter{
@@ -83,15 +81,17 @@ ul{
     position: relative;
     width: 200px;
     background-color: #2e3a46;
+    box-shadow: none;
     margin: 10px 20px;
     padding: 10px 30px;
     border-radius: 5px;
     overflow: hidden;
-    cursor: pointer;
-    transition: transform .3s;
+    transition: transform .3s,
+                padding .3s,
+                box-shadow .3s;
 }
 
-.result ul>li{
+.result .content>div{
     margin-bottom: 10px;
 }
 
@@ -102,6 +102,7 @@ ul{
 
 .result .title{
     text-transform: uppercase;
+    transition: all .3s;
 }
 
 .result .original-title{
@@ -123,37 +124,64 @@ ul{
     border-radius: 2px;
 }
 
+.result .language,
+.result .original-title,
+.result .vote{
+    position: relative;
+    left: 0;
+    transition: left .3s;
+}
+
 .result:hover{
     transform: scale(1.2);
+    padding: 0;
+    box-shadow: 0 0 15px 1px #111;    
     z-index: 1;
 }
 
-.result:hover .show-hover{
+.result:hover .layhover{
     opacity: 1;
     bottom: 0;
 }
 
-.result .show-hover{
-    justify-content: center;
+.result:hover .title{
+    position: absolute;
+    bottom: 20px;
+    padding: 10px;
+    text-align: left;
+}
+
+.result:hover .language,
+.result:hover .original-title,
+.result:hover .vote{
+    left: 180px;
+}
+
+.result .layhover{
+    display: flex;
+    align-items: center;
     position: absolute;
     left: 0;
     bottom: 100%;
     width:100%;
     height: 100%;
-    overflow: auto;
     padding: 10px;
     font-size: 14px;
     color: #fff;
     background-color: rgba(0,0,0,.8);
     opacity: 0;
-    transition: opacity .3s,
-                bottom .3s;
+    transition: all .3s;
 }
 
-.result .show-hover .text{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    text-align: center;
+.result .layhover .box-text{
+    height: 80%;
+    overflow: auto;
 }
+
+.layhover .box-text .points{
+    cursor: pointer;
+    color: silver;
+}
+
+
 

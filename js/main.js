@@ -11,6 +11,8 @@ const app = new Vue ({
         filter: 'all',
         filterObj: {},
         showFilter: false,
+        overDescription: false,
+        more:false,
         
 
     },
@@ -78,6 +80,7 @@ const app = new Vue ({
             return this.flagList.includes(lang);
         },
         takeGenres(){
+            //non funzionante
             this.list.forEach(element =>{
                 element.genre_ids.forEach(genre =>{
                     if (!this.listActualGenre.includes(genre)){
@@ -130,7 +133,9 @@ const app = new Vue ({
         shortDescription(){
             this.list.forEach(element =>{
                 if (element.overview.length > 300){
-                    element.overview = element.overview.slice(0,300).concat('...');
+                    this.overDescription = true;
+                    element.short_overview = element.overview.slice(0,300);
+                    // element.overview = element.overview.slice(0,300);
                 };
             })
         },

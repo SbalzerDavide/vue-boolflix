@@ -55,11 +55,11 @@
                                 <div class="cover">
                                     <img 
                                         v-if="result.poster_path"
-                                        :src="`http://image.tmdb.org/t/p/w342/${result.poster_path}`" alt=""
+                                        :src="`http://image.tmdb.org/t/p/w342/${result.poster_path}`" :alt="result.title"
                                     >
                                     <img 
                                         v-else
-                                        src="https://www.altavod.com/assets/images/poster-placeholder.png" alt=""
+                                        src="https://www.altavod.com/assets/images/poster-placeholder.png" alt="copertina non presente"
                                     >
                                 </div>
                                 <div class="title">
@@ -71,6 +71,7 @@
                                 <div class="vote">
                                     <i v-for="n in takeVote(result.vote_average)" class="fas fa-star"></i><i v-for="n in (5 - takeVote(result.vote_average))" class="far fa-star"></i>
                                 </div>
+
                                 <div class="language">
                                     <img 
                                         v-if="flag(result.original_language)" 
@@ -82,21 +83,34 @@
                                     </div>
                                 </div>
                             </div>
-                            <div v-if="result.overview" class="show-hover">
-                                <div class="text">
-                                    {{result.overview}}
+                            <div v-if="result.overview" class="layhover">
+                                <div class="box-text">
+
+                                    <!-- previwe and coplete description -->
+                                    <span class="text" v-if="overDescription && !more" @click="more = !more">
+                                        {{result.short_overview}}
+                                    </span>
+                                    <span class="text" v-if="overDescription && more" @click="more = !more">
+                                        {{result.overview}}
+                                    </span>
+
+
+                                    <!-- bottom for read more or less text -->
+                                    <span class="points" v-if="overDescription && !more" @click="more = !more">
+                                        ... [leggi di più]
+                                    </span>
+                                    <span class="points" v-if="overDescription && more" @click= "more = !more">
+                                        [leggi di meno]
+                                    </span>
                                 </div>
-                            </div>
+                            </div>              
                         </div>
-
-
-
-
                     </li>
                 </ul>
             </div>
 
         </div>
+
 
     </div>
     
