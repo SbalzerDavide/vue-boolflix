@@ -57,9 +57,10 @@
                 <div class="year">
                     <span>Anno di uscita</span>
                     <input type="number" v-model="year">
-                    <span class="error-filter" v-if="!correctYear">Attenzione inserisci un anno compreso tra 1900 e l'anno attuale</span>
+                    <span class="error-filter" v-if="!correctYear">Attenzione! Inserisci un anno compreso tra 1900 e l'anno attuale</span>
                 </div>
 
+                <!-- start filter -->
                 <button @click="applyFilter">applica filtri</button>
 
             </div>
@@ -134,7 +135,7 @@
 
     </div>
     
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>

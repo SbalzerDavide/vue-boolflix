@@ -16,13 +16,15 @@ const app = new Vue ({
         more:false,
         year: '',
         correctYear: true,
+        currentYear: dayjs().format('YYYY'),
 
         
 
     },
     created(){ 
         this.getGenres();
-        this.controlYear();
+        // this.controlYear();
+        console.log(this.currentYear);
 
     },
     methods:{
@@ -138,15 +140,17 @@ const app = new Vue ({
                 if (element.overview.length > 300){
                     this.overDescription = true;
                     element.short_overview = element.overview.slice(0,300);
+                }else {
+                    element.short_overview = element.overview;
+                    this.overDescription = false;
+
                 };
             })
         },
         applyFilter(){
-            if (this.year < 1900 || this.year > 2020){
+            if (this.year!= '' && this.year < 1900 || this.year > this.currentYear ){
                 this.correctYear = false;
-            }else if (this.search !== ''){
-
-            
+            }else if (this.search !== ''){            
                 // other api call for movie 
                 axios.get('https://api.themoviedb.org/3/search/movie', {
                     params: {
@@ -204,11 +208,11 @@ const app = new Vue ({
                 this.correctYear = true;
             };
         },
-        controlYear(){
-            if (this.year < 1900 || this.year > 2020){
-                this.correctyear = false;
-            }
-        }
+        // controlYear(){
+        //     if (this.year < 1900 || this.year > 2020){
+        //         this.correctyear = false;
+        //     }
+        // }
 
 
     }

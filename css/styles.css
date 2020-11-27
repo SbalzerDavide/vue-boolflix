@@ -23,6 +23,14 @@ input:focus{
     outline: none;
 }
 
+button{
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
 #app{
     display: flex;
     flex-direction: column;
@@ -64,6 +72,10 @@ input:focus{
 /* select */
 .filter{
     padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: #2e3a46;
+    box-shadow: 0 0 15px 1px #111;    
 }
 
 .all-filter{
@@ -84,6 +96,11 @@ input:focus{
     text-align: center;
 }
 
+
+.filter .preview{
+    cursor: pointer;
+}
+
 .filter input{
     width: 150px;
     padding: 2px 10px;
@@ -95,7 +112,7 @@ input:focus{
 
 .filter .error-filter{
     position: absolute;
-    bottom: 120%;
+    bottom: 150%;
     left: 70%;
     width: 200px;
     font-size: 12px;
@@ -104,6 +121,17 @@ input:focus{
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 15px 1px #111;    
+}
+
+.filter .error-filter::after{
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 20px;
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    transform: rotate(45deg);
 }
 
 /* single box */
@@ -184,7 +212,7 @@ input:focus{
 .result:hover .language,
 .result:hover .original-title,
 .result:hover .vote{
-    left: 180px;
+    left: 250px;
 }
 
 .result .layhover{
